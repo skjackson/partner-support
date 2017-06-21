@@ -39,6 +39,8 @@ multiscm {
             remote {
                 url('https://github.com/edx/partner-support.git')
             }
+       }
+}
 
 triggers {
         cron('30 * * * *')  // Every day at the 30 minute mark of the hour
@@ -53,5 +55,4 @@ triggers {
             command readFileFromWorkspace('partner-support/resources/zendesk_org_add.sh')
         }
     }
-}    
-
+}
