@@ -1,0 +1,9 @@
+cachetools==1.1.6
+future==0.16.0
+PyMySQL==0.7.2
+python-dateutil==2.5.3
+pytz==2016.7
+requests==2.13.0
+six==1.10.0
+vertica-python==0.6.8
+zenpy==1.0.7
