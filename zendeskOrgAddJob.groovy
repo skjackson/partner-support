@@ -9,9 +9,9 @@ import org.yaml.snakeyaml.error.YAMLException
 Map secureConfig = [:]
 
 try {
-    secureConfig = parseYaml('@Partner-Support-Secure/jenkins/settings.yml', this)
+    secureConfig = parseYaml('@customer-support-secure/jenkins/settings.yml', this)
 } catch (YAMLException e) {
-    throw new IllegalArgumentException("@Partner-Support-Secure/jenkins/settings.yml: ${e.message}")
+    throw new IllegalArgumentException("@customer-support-secure/jenkins/settings.yml: ${e.message}")
 }
 
 jobName = 'zendesk_org_add'
