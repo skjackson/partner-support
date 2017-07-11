@@ -23,7 +23,7 @@ def ticket_search(api_connection):
   for ticket in api_connection.search(status_less_than = 'closed'):
     # Add logic so that it ignores tickets that have a partner_ tag
     filtered = fnmatch.filter(ticket.tags, 'partner_*')
-    if filtered:
+    if filtered or 'closed_by_merge' in ticket.tags: #for some reason the search finds closed_by_merge tickets
       pass
     elif 'whitelabel_harvardxplus' in ticket.tags:
       ticket_results.append({'ticketid': ticket.id, 'course': field['value'], 'tickobj': ticket})
