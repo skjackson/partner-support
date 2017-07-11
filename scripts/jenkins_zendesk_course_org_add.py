@@ -18,6 +18,7 @@ from email.mime.text import MIMEText
 
 # Finds all the not closed tickets and checks if the course field exists
 def ticket_search(api_connection):
+  print ('Searching for Zendesk tickets......')
   ticket_results = []
   for ticket in api_connection.search(status_less_than = 'closed'):
     # Add logic so that it ignores tickets that have a partner_ tag
@@ -36,6 +37,7 @@ def ticket_search(api_connection):
 # Checks the lms and edge databases to see if the course ID exists. puts the tickets into
 # different buckets of exists, does not exist, bad format for the course ID
 def course_search(tickets, lms_conn, edge_conn):
+  print ('Searching for Courses......')
   course_results = []
   no_course_results = []
   bad_course_results = []
@@ -84,6 +86,7 @@ def course_search(tickets, lms_conn, edge_conn):
 
 # Adds the org tag as 'partner_org' to the ticket
 def org_tag_add(api_connection, course_results, vconn, log_file = None):
+  print ('Updating Zendesk tickets......')
   program_sql = "select program_type, program_title from production.d_program_course where course_id = 'COURSEID'"
   vcur = vconn.cursor()
   for ticket in course_results:
@@ -152,6 +155,7 @@ def main():
   creds = {'email': email, 'token': token, 'subdomain': subdomain}
   
   # connection object used to search, do updates, etc
+  print ('Creating connection Zendesk Connection object')
   api_connection = zenpy.Zenpy(**creds)
   
   # LMS DB
