@@ -155,7 +155,7 @@ def main():
   creds = {'email': email, 'token': token, 'subdomain': subdomain}
   
   # connection object used to search, do updates, etc
-  print ('Creating connection Zendesk Connection object')
+  print ('Creating Zendesk Connection object')
   api_connection = zenpy.Zenpy(**creds)
   
   # LMS DB
