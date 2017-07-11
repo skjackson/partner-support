@@ -205,6 +205,7 @@ def main():
         else:
           bad_exist[badticket['tickinfo']['tickobj'].assignee.name] = ['Ticket ' + str(badticket['ticketid']) + ' has course field as ' + badticket['tickinfo']['course']]  
 
+    """      
     # Simply printing out the tickets with bad course IDs
     for a in no_exist.items():
       print (a[0])
@@ -214,7 +215,7 @@ def main():
       print (b[0])
       for d in b[1]:
         print (d)   
-    """
+   
     if no_exist:
       #timehour = time.localtime()
       if timehour.tm_hour == 15:
