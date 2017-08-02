@@ -167,7 +167,9 @@ def main():
   
   # Edge DB
   edgehostname = os.environ['EDGE_HOST']
+  edgeuser = os.environ['EDGE_USER']
   edgepw = os.environ['EDGE_PW']
+  edgedb = os.environ['EDGE_DBNAME']
   
   # Data warehouse connection info
   warehousehost = os.environ['WAREHOUSE_HOST'] 
@@ -179,7 +181,7 @@ def main():
   tickets = ticket_search(api_connection)
   if tickets:
     lms_conn = pymysql.connect(host = hostname, port = portnumber, user = username, passwd = password, db = database)
-    edge_conn = pymysql.connect(host = edgehostname, port = portnumber, user = username, passwd = edgepw, db = database)
+    edge_conn = pymysql.connect(host = edgehostname, port = portnumber, user = edgeuser, passwd = edgepw, db = edgedb)
     course_output = course_search(tickets, lms_conn, edge_conn)
     lms_conn.close()
     edge_conn.close()
