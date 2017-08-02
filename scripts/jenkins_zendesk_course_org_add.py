@@ -170,10 +170,10 @@ def main():
   edgepw = os.environ['EDGE_PW']
   
   # Data warehouse connection info
-  warehousehost = os.environ['WH_HOST'] 
+  warehousehost = os.environ['WAREHOUSE_HOST'] 
   warehouseport = 5433
-  warehouseuser = os.environ['WH_USER'] 
-  warehousepw = os.environ['WH_PW'] 
+  warehouseuser = os.environ['WAREHOUSE_USER'] 
+  warehousepw = os.environ['WAREHOUSE_PW'] 
   warehousedb = 'warehouse'
   
   tickets = ticket_search(api_connection)
