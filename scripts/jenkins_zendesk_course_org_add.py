@@ -162,20 +162,20 @@ def main():
   hostname = os.environ['LMS_HOST']
   portnumber = 3306
   username = os.environ['LMS_USER']
-  password = os.environ['LMS_PW']
+  password = os.environ['LMS_PASSWORD']
   database = os.environ['LMS_DBNAME']
   
   # Edge DB
   edgehostname = os.environ['EDGE_HOST']
   edgeuser = os.environ['EDGE_USER']
-  edgepw = os.environ['EDGE_PW']
+  edgepw = os.environ['EDGE_PASSWORD']
   edgedb = os.environ['EDGE_DBNAME']
   
   # Data warehouse connection info
   warehousehost = os.environ['WAREHOUSE_HOST'] 
   warehouseport = 5433
   warehouseuser = os.environ['WAREHOUSE_USER'] 
-  warehousepw = os.environ['WAREHOUSE_PW'] 
+  warehousepw = os.environ['WAREHOUSE_PASSWORD'] 
   warehousedb = 'warehouse'
   
   tickets = ticket_search(api_connection)
