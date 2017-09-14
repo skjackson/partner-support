@@ -129,7 +129,7 @@ def org_tag_add(api_connection, course_results, vconn, log_file = None):
               print(str(ticket['ticketid']) + ' ticket will add Enrollment mode of ' + ticket['mode'])
     api_connection.tickets.update(ticket['tickinfo']['tickobj'])
     #logging(log_file, output)
-    print(output)
+    #print(output)
   vcur.close() 
   
 """
