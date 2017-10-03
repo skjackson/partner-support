@@ -47,7 +47,7 @@ def course_search(tickets, lms_conn, edge_conn):
   edge_cur = edge_conn.cursor()
   for ticket in tickets:
     # add sys_eng check here and if successful add ticket to course_results MITProfessionalX is org
-    if ticket['course'] == 'syseng_bundle' or ticket['course'] == 'syseng_bundle_3':
+    if ticket['course'] == 'syseng_bundle' or ticket['course'] == 'syseng_bundle_3' or ticket['course'] == 'syseng_bundle_4':
       course_results.append({'ticketid': ticket['ticketid'], 'org': 'MITxPRO', 'tickinfo': ticket})
     # check ticket['tickobj'].tags if whitelabel_harvardxplus
     elif 'whitelabel_harvardxplus' in ticket['tickobj'].tags:
