@@ -25,7 +25,7 @@ def enterprise_ticket_search(api_connection, lms_conn):
   lms_cur = lms_conn.cursor()     
   print ('Searching for Enterprise tickets....')                 
   for ticket in api_connection.search(status_less_than = 'closed'):
-    if 'closed_by_merge' in ticket.tags:
+    if 'closed_by_merge' in ticket.tags or ticket.requester.email == 'service@paypal.com': #hacky bug fix
       pass
     else:
       lms_cur.execute(enterprise_sql.replace('EMAILADDRESS', ticket.requester.email))
