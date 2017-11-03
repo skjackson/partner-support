@@ -28,18 +28,21 @@ def enterprise_ticket_search(api_connection, lms_conn):
     if 'closed_by_merge' in ticket.tags:
       pass
     else:
-      lms_cur.execute(enterprise_sql.replace('EMAILADDRESS', ticket.requester.email))
-      enterprise_name = lms_cur.fetchone()
-      if enterprise_name:
-        for field in ticket.custom_fields:
-          if field['id'] == 77417128: #enterprise_customer_name Zendesk field ID
-            if field['value']:
-              pass
-            else:  
-              field['value'] = enterprise_name[0]
-              ticket.tags.append('enterprise_learner')
-              print (str(ticket.id) + ' ticket will add Enterprise name of ' + enterprise_name[0])
-              api_connection.tickets.update(ticket)
+      try:
+        lms_cur.execute(enterprise_sql.replace('EMAILADDRESS', ticket.requester.email))
+        enterprise_name = lms_cur.fetchone()
+        if enterprise_name:
+          for field in ticket.custom_fields:
+            if field['id'] == 77417128: #enterprise_customer_name Zendesk field ID
+              if field['value']:
+                pass
+              else:  
+                field['value'] = enterprise_name[0]
+                ticket.tags.append('enterprise_learner')
+                print (str(ticket.id) + ' ticket will add Enterprise name of ' + enterprise_name[0])
+                api_connection.tickets.update(ticket)
+      except:
+        pass
   lms_cur.close()
         
 
