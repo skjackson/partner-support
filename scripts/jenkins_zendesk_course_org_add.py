@@ -28,7 +28,7 @@ def enterprise_ticket_search(api_connection, lms_conn):
     if 'closed_by_merge' in ticket.tags:
       pass
     else:
-      lms_cur.execute(enterprise_sql.replace('EMAILADDESS', ticket.requester.email))
+      lms_cur.execute(enterprise_sql.replace('EMAILADDRESS', ticket.requester.email))
       enterprise_name = lms_cur.fetchone()
       if enterprise_name:
         for field in ticket.custom_fields:
