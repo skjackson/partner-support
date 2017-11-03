@@ -16,6 +16,33 @@ import mimetypes
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+#hack to find the enterprise tickets and add the enterprise_customer_name
+def enterprise_ticket_search(api_connection, lms_conn):
+  enterprise_sql = "select ep.name from enterprise_enterprisecustomeruser eu, " \
+                        "enterprise_enterprisecustomer ep, auth_user au " \
+                        "where au.id = eu.user_id and eu.enterprise_customer_id = ep.uuid " \
+                        "and au.email = 'EMAILADDRESS'"
+  lms_cur = lms_conn.cursor()     
+  print ('Searching for Enterprise tickets....')                 
+  for ticket in api_connection.search(status_less_than = 'closed'):
+    if 'closed_by_merge' in ticket.tags:
+      pass
+    else:
+      lms_cur.execute(enterprise_sql.replace('EMAILADDESS', ticket.requester.email))
+      enterprise_name = lms_cur.fetchone()
+      if enterprise_name:
+        for field in ticket.custom_fields:
+          if field['id'] == 77417128: #enterprise_customer_name Zendesk field ID
+            if field['value']:
+              pass
+            else:  
+              field['value'] = enterprise_name[0]
+              ticket.tags.append('enterprise_learner')
+              print (str(ticket.id) + ' ticket will add Enterprise name of ' + enterprise_name[0])
+              api_connection.tickets.update(ticket)
+  lms_cur.close()
+        
+
 # Finds all the not closed tickets and checks if the course field exists
 def ticket_search(api_connection):
   print ('Searching for Zendesk tickets......')
@@ -177,6 +204,10 @@ def main():
   warehouseuser = os.environ['WAREHOUSE_USER'] 
   warehousepw = os.environ['WAREHOUSE_PASSWORD'] 
   warehousedb = 'warehouse'
+  
+  lms_conn = pymysql.connect(host = hostname, port = portnumber, user = username, passwd = password, db = database)
+  enterprise_ticket_search(api_connection, lms_conn)
+  lms_conn.close()
   
   tickets = ticket_search(api_connection)
   if tickets:
