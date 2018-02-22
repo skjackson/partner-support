@@ -150,13 +150,13 @@ def org_tag_add(api_connection, course_results, vconn, log_file = None):
           if field['value']: #checking if it exists and adding tag for verified
             if field['value'] == 'verified':
               ticket['tickinfo']['tickobj'].tags.append('verified_enrollment')
-              ticket['tickinfo']['tickobj'].priority = 'verified'
+              ticket['tickinfo']['tickobj'].priority = 'high'
           else:  
             if 'mode' in ticket.keys():
               field['value'] = ticket['mode']
               if ticket['mode'] == 'verified':
                 ticket['tickinfo']['tickobj'].tags.append('verified_enrollment')
-                ticket['tickinfo']['tickobj'].priority = 'verified'
+                ticket['tickinfo']['tickobj'].priority = 'high'
               #logging(log_file, str(ticket['ticketid']) + ' ticket will add Enrollment mode of ' + ticket['mode'])  
               print(str(ticket['ticketid']) + ' ticket will add Enrollment mode of ' + ticket['mode'])
     api_connection.tickets.update(ticket['tickinfo']['tickobj'])
