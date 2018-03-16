@@ -277,4 +277,14 @@ def main():
 
 # This is the standard boilerplate that calls the main() function
 if __name__ == '__main__':
-  main()
+  # Register a handler for the timeout
+  def handler(signum, frame):
+    raise Exception('Timeout error')
+    
+  signal.signal(signal.SIGALRM, handler) # Register the signal function handler
+  
+  try:
+    signal.alarm(2700) #timeout of 45 minutes
+    main()
+  except Exception as e:
+    print (e)
