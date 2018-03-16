@@ -13,6 +13,7 @@ import time
 import fnmatch
 import smtplib
 import mimetypes
+import signal
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
