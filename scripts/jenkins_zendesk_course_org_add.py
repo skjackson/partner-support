@@ -14,6 +14,7 @@ import fnmatch
 import smtplib
 import mimetypes
 import signal
+import sys
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
